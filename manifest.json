@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Voice Call Minimal",
+  "version": "0.1",
+  "description": "Show only Discord voice calls and control via hotkeys.",
+  "permissions": [
+    "scripting",
+    "commands",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://discord.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "join-voice": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+J"
+      },
+      "description": "Join voice channel"
+    },
+    "leave-voice": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      },
+      "description": "Leave voice channel"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://discord.com/channels/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
