@@ -1,6 +1,5 @@
-// Hide most Discord UI except voice controls
+// Minimal UI: Hide Discord UI except voice controls (fragile, may need tweaking)
 function hideUI() {
-  // Hide sidebar, chat, etc. (fragile selectors!)
   const selectors = [
     '[class*="sidebar"]',
     '[class*="chatContent"]',
@@ -17,10 +16,8 @@ function hideUI() {
   if (voicePanel) voicePanel.style.width = "100vw";
 }
 
-// Try to click join/leave buttons
 function simulateVoiceAction(command) {
   if (command === "join-voice") {
-    // Try to find and click the 'Join Voice' button
     const joinBtn = [...document.querySelectorAll('button')]
       .find(btn => btn.textContent.toLowerCase().includes("join voice"));
     if (joinBtn) joinBtn.click();
@@ -35,7 +32,6 @@ function simulateVoiceAction(command) {
 window.addEventListener("DOMContentLoaded", hideUI);
 window.addEventListener("load", hideUI);
 
-// Listen for hotkey messages from background
 window.addEventListener("message", (e) => {
   if (e.data?.type === "DISCORD_VOICE_COMMAND") {
     simulateVoiceAction(e.data.command);
