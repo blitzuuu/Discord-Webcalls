@@ -1,40 +1,32 @@
-# Discord Voice Call Minimal Extension
+# Discord Proxy (Educational Use Only)
 
-A Chromium extension to display only Discord voice calls and control them with hotkeys.
+This is a Node.js proxy that removes frame-blocking headers from Discord’s web app, allowing it to be loaded in an iframe.
 
-## Features
+## How it works
 
-- Shows Discord in a popup, hiding most UI except voice calls.
-- Hotkeys to join (`Ctrl+Shift+J`) and leave (`Ctrl+Shift+L`) voice channels.
-- Simple, proof-of-concept code (may break if Discord updates UI).
+- Proxies all requests to `https://discord.com`.
+- Removes `X-Frame-Options` and `frame-ancestors` in `Content-Security-Policy`.
+- Allows you to embed `http://localhost:3000/channels/@me` in an iframe.
 
-## How to use
+## Usage
 
-1. **Clone or Download**
-   - Download this repository as a ZIP and extract, or clone with:
-     ```
-     git clone https://github.com/YOUR_USERNAME/discord-voice-extension.git
-     ```
+1. **Install dependencies:**
+    ```
+    npm install
+    ```
 
-2. **Load as Unpacked Extension**
-   - Go to `chrome://extensions/` in your Chromium-based browser.
-   - Enable "Developer mode" (toggle upper right).
-   - Click "Load unpacked" and select this folder.
+2. **Start the proxy:**
+    ```
+    npm start
+    ```
 
-3. **Open the Extension**
-   - Click the extension icon and open the popup to load Discord.
-   - Log in if needed.
+3. **In your browser or extension:**  
+    Use `<iframe src="http://localhost:3000/channels/@me"></iframe>`
 
-4. **Use Hotkeys**
-   - Use `Ctrl+Shift+J` to join a voice call (when available).
-   - Use `Ctrl+Shift+L` to leave a voice call.
+## WARNING
 
-## Notes & Caveats
-
-- **Fragile:** May break if Discord changes their UI.
-- **Terms of Service:** Automating Discord UI may violate their ToS. Use at your own risk.
-- **No Guarantee:** This is a demo/proof-of-concept.
+- This violates Discord’s Terms of Service and may get your account banned.
+- May expose you to security risks.
+- For educational purposes only.
 
 ---
-
-**Not affiliated with Discord. For educational use only.**
