@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Discord Voice Only</title>
+    <title>Discord Voice Extension</title>
     <style>
-      html, body, iframe {
-        width: 400px;
-        height: 600px;
-        margin: 0;
-        padding: 0;
-        border: none;
-      }
-      body { overflow: hidden; }
+      body { width: 240px; height: 80px; display: flex; align-items: center; justify-content: center; }
+      button { font-size: 1.1em; padding: 10px 20px; }
     </style>
   </head>
   <body>
-    <iframe id="discord-frame" src="https://discord.com/channels/@me" frameborder="0"></iframe>
+    <button id="open-discord">Open Discord</button>
+    <script>
+      document.getElementById('open-discord').onclick = function() {
+        chrome.tabs.query({url: "https://discord.com/channels/*"}, (tabs) => {
+          if (tabs.length > 0) {
+            chrome.tabs.update(tabs[0].id, {active: true});
+          } else {
+            chrome.tabs.create({url: "https://discord.com/channels/@me"});
+          }
+        });
+      };
+    </script>
   </body>
 </html>
